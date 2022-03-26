@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 //Indicar que todas las rutas 
-//app.use('/',require('./products'));
+app.use('/api',require('./routes/items'));
 
 
 
