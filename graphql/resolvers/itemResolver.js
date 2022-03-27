@@ -2,8 +2,8 @@ const axios = require("axios");
 
 const resolvers = {
     Query: {
-        getAllItemsType: ()=> getAllItemsResolver(),
-        getItem: ()=> getItemResolver()
+        getAllItemsType: (root, args)=> getAllItemsResolver(args),
+        getItem: (root, args)=> getItemResolver(args)
     },
     Item: {
         price : (root)  => {
@@ -24,14 +24,18 @@ const resolvers = {
     }
 }
 
-const getAllItemsResolver = async () => {
-    const { data: items } = await axios("https://api.mercadolibre.com/sites/MLA/search?q=carros");
+const getAllItemsResolver = async (args) => {
+    const {search} = args;
+    console.log(search)
+    const { data: items } = await axios(`https://api.mercadolibre.com/sites/MLA/search?q=${search}`);
     return(items.results);
 }
 
-const getItemResolver = async () => {
-    const { data: item } = await axios("https://api.mercadolibre.com/items/MLA854978355");
-    const { data: itemDescription} = await axios("https://api.mercadolibre.com/items/MLA854978355/description");
+const getItemResolver = async (args) => {
+    const {id} = args;
+
+    const { data: item } = await axios(`https://api.mercadolibre.com/items/${id}`);
+    const { data: itemDescription} = await axios(`https://api.mercadolibre.com/items/${id}/description`);
 
     return({
         ...item,
