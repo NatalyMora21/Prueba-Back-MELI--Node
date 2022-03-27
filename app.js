@@ -1,13 +1,28 @@
-const express = require("express");
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
+const typeDefs  =  require ('./graphql/schema/itemsSchema');
+const resolver = require ('./graphql/resolvers/itemResolver');
+
+const { makeExecutableSchema } = require('graphql-tools');
+const schema = makeExecutableSchema({
+  typeDefs: typeDefs,
+  resolvers: resolver,
+});
+
+
+
 const app = express();
 
-//Import Routes
-app.use(express.json());
-app.use(express.urlencoded({extended:false}));
-//Indicar que todas las rutas 
-app.use('/api',require('./routes/items'));
+      
 
-
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema,
+    rootValue:resolver,
+    graphiql: true,
+  }),
+);
 
 
 module.exports = app;
