@@ -2,7 +2,7 @@ var { graphql, buildSchema } = require('graphql');
 
 var schema = buildSchema(`
   type Query {
-    getAllItemsType: [Item],
+    getAllItemsType(search: String): [Item]
     getItem:Item
   }
 
