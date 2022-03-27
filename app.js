@@ -13,7 +13,7 @@ const schema = makeExecutableSchema({
 
 const app = express();
 
-      
+     
 
 app.use(
   '/graphql',

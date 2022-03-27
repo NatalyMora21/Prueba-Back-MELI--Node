@@ -16,19 +16,10 @@ var schema = buildSchema(`
     sold_quantity: Float
   }
 
-
   type ItemInfo {
-    id: String
-    title: String
-    price: Price
-    picture: String
-    condition: String
-    free_shipping: Boolean
-    sold_quantity: Float
+    item: Item
     description: String
   }
-
-
 
   type Price {
     currency: String
