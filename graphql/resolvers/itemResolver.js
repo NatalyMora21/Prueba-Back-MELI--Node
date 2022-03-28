@@ -12,16 +12,10 @@ const resolvers = {
                 amount: root.prices.prices[0].amount,
             }
         },
-        picture: (root) => root.thumbnail
+        picture: (root) => root.thumbnail,
+        description: (root) => root.plain_text,
     },
 
-    ItemInfo: {
-        description : (root)  => {
-            return {
-                description: root.plain_text,
-            }
-        }
-    }
 }
 
 const getAllItemsResolver = async (args) => {
@@ -35,8 +29,16 @@ const getAllItemsResolver = async (args) => {
 const getItemResolver = async (args) => {
     const {id} = args;
 
+    console.log(id)
+
     const { data: item } = await axios(`https://api.mercadolibre.com/items/${id}`);
     const { data: itemDescription} = await axios(`https://api.mercadolibre.com/items/${id}/description`);
+
+
+    console.log({
+        ...item,
+        ...itemDescription
+    })
 
     return({
         ...item,
