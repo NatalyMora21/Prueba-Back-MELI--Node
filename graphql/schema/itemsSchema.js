@@ -3,8 +3,7 @@ var { graphql, buildSchema } = require('graphql');
 var schema = buildSchema(`
   type Query {
     getAllItemsType(search: String): [Item]
-    getItem(id: String):Item
-
+    getItem(id: String):ItemInfo
   }
 
   type Item {
@@ -15,10 +14,19 @@ var schema = buildSchema(`
     condition: String
     free_shipping: Boolean
     sold_quantity: Float
-    description: String
+
   }
 
-
+  type ItemInfo {
+    id: String
+    title: String
+    price: Price
+    picture: String
+    condition: String
+    free_shipping: Boolean
+    sold_quantity: Float
+    description: String
+  }
 
   type Price {
     currency: String

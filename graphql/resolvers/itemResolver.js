@@ -13,8 +13,21 @@ const resolvers = {
             }
         },
         picture: (root) => root.thumbnail,
-        description: (root) => root.plain_text,
     },
+
+    ItemInfo: {
+        price : (root)  => {
+            return {
+                currency: root.currency_id,
+                amount: root.price,
+            }
+        },
+        picture: (root) => root.thumbnail,
+        description: (root) => root.plain_text,
+        free_shipping: (root) => root.shipping.free_shipping
+    },
+
+    
 
 }
 
@@ -33,7 +46,6 @@ const getItemResolver = async (args) => {
 
     const { data: item } = await axios(`https://api.mercadolibre.com/items/${id}`);
     const { data: itemDescription} = await axios(`https://api.mercadolibre.com/items/${id}/description`);
-
 
     console.log({
         ...item,
