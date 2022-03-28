@@ -8,8 +8,8 @@ const resolvers = {
     Item: {
         price : (root)  => {
             return {
-                currency: root.prices.currency_id,
-                amount: root.prices.currency_id,
+                currency: root.prices.prices[0].currency_id,
+                amount: root.prices.prices[0].amount,
             }
         },
         picture: (root) => root.thumbnail
@@ -28,6 +28,7 @@ const getAllItemsResolver = async (args) => {
     const {search} = args;
     console.log(search)
     const { data: items } = await axios(`https://api.mercadolibre.com/sites/MLA/search?q=${search}`);
+    console.log(items.results[0])
     return(items.results);
 }
 
