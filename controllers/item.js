@@ -28,12 +28,7 @@ const infoItem = async (req, res) => {
 
     const infoitem = await axios("https://api.mercadolibre.com/sites/MLA/search?q=carros)");
     const descriptionItem = await axios("https://api.mercadolibre.com/sites/MLA/search?q=carros)");
-    console.log(infoitem);
     res.send('Info de un item especifico');
-
-
-
-
 
 }
 

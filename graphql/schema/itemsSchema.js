@@ -7,6 +7,7 @@ var schema = buildSchema(`
   }
 
   type Item {
+    author: Author
     id: String
     title: String
     price: Price
@@ -18,6 +19,7 @@ var schema = buildSchema(`
   }
 
   type ItemInfo {
+    author: Author
     id: String
     title: String
     price: Price
@@ -32,6 +34,11 @@ var schema = buildSchema(`
     currency: String
     amount: Float
     decimals: Float
+  }
+
+  type Author {
+    name: String
+    lastName: String
   }
   
 `);
